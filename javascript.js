@@ -1,55 +1,59 @@
 const mainContainer = document.querySelector('#main-container');
-const squaresPerSide = 100;
-const gridSize = squaresPerSide * squaresPerSide;
-const squareSize = 700 / squaresPerSide + 'px';
 const resetButton = document.querySelector('#reset-button');
+const squaresPerSideButton = document.querySelector('#squares-per-side');
+const info = document.querySelector('#info');
 
-console.log(`Grid size: ${squaresPerSide} * ${squaresPerSide}`);
-console.log(`Square size: ${squareSize}`);
-
-// Make a square
-function makeSquare() {
-  const gridSquare = document.createElement('div');
-  gridSquare.id = 'grid-square';
-  return gridSquare;
-}
-
-// Make the grid
-function makeGrid(size) {
-  for (i = 0; i < size; i++) {
-    const gridSquare = makeSquare();
-    mainContainer.appendChild(gridSquare);
+function playGame() {
+  // Clear the grid
+  while (mainContainer.lastChild) {
+    mainContainer.removeChild(mainContainer.lastChild);
   }
-}
-makeGrid(gridSize);
 
-const allSquares = document.querySelectorAll('#grid-square');
-console.log(`Squares in allSquares NodeList: ${allSquares.length}`);
+  // Get squares per side
+  let squaresPerSide = prompt('How many squares per side (Max 50): ');
+  if (squaresPerSide > 50) {
+    squaresPerSide = 50;
+  } else if (squaresPerSide === null || squaresPerSide === '') {
+    squaresPerSide = Math.floor(Math.random() * 50 + 1);
+  }
+  info.textContent = `Squares per side: ${squaresPerSide}`;
 
-// Define square size according to squares per side
-allSquares.forEach(
-  (gridSquare) => (
-    (gridSquare.style.width = squareSize),
-    (gridSquare.style.height = squareSize)
-  )
-);
+  // Calculate how many squares needed
+  let squaresNeeded = squaresPerSide * squaresPerSide;
 
-// Change square color when hovering over it
-allSquares.forEach((gridSquare) =>
-  gridSquare.addEventListener('mouseenter', () => {
-    gridSquare.style.backgroundColor = 'blue';
-  })
-);
+  // Populate grid
+  for (i = 0; i < squaresNeeded; i++) {
+    const square = document.createElement('div');
+    square.id = 'grid-square';
+    mainContainer.appendChild(square);
+  }
 
-// // Change square color when hovering off of it
-// allSquares.forEach((gridSquare) =>
-//   gridSquare.addEventListener('mouseleave', () => {
-//     gridSquare.style.backgroundColor = 'transparent';
-//   })
-// );
+  // Get all squares
+  const allSquares = document.querySelectorAll('#grid-square');
 
-resetButton.addEventListener('click', () => {
+  // Define size for all squares
+  let squareSize = 700 / squaresPerSide + 'px';
   allSquares.forEach(
-    (gridSquare) => (gridSquare.style.backgroundColor = 'transparent')
+    (square) => (
+      (square.style.width = squareSize), (square.style.height = squareSize)
+    )
   );
-});
+
+  // Implement hover coloring of squares
+  allSquares.forEach((square) =>
+    square.addEventListener('mouseenter', () => {
+      square.style.backgroundColor = 'blue';
+    })
+  );
+
+  // Implement Reset and Squares per side buttons
+  function reset() {
+    allSquares.forEach(
+      (square) => (square.style.backgroundColor = 'transparent')
+    );
+  }
+  resetButton.addEventListener('click', reset);
+  squaresPerSideButton.addEventListener('click', playGame);
+}
+
+playGame();
