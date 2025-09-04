@@ -14,7 +14,7 @@ function playGame() {
   let squaresPerSide = prompt(
     `How many squares per side?
     Max ${maxSquares}
-    empty = random)`
+    empty = random`
   );
   if (squaresPerSide > maxSquares) {
     squaresPerSide = maxSquares;
@@ -45,9 +45,15 @@ function playGame() {
   );
 
   // Implement hover coloring of squares
+  function randomRGB() {
+    const ranA = Math.floor(Math.random() * 255 + 1);
+    const ranB = Math.floor(Math.random() * 255 + 1);
+    const ranC = Math.floor(Math.random() * 255 + 1);
+    return `rgb(${ranA},${ranB},${ranC})`;
+  }
   allSquares.forEach((square) =>
     square.addEventListener('mouseenter', () => {
-      square.style.backgroundColor = 'blue';
+      square.style.backgroundColor = randomRGB();
     })
   );
 
