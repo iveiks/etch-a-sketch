@@ -54,6 +54,7 @@ function playGame() {
   allSquares.forEach((square) =>
     square.addEventListener('mouseenter', () => {
       square.style.backgroundColor = randomRGB();
+      square.style.transition = 'all 400ms';
     })
   );
 
