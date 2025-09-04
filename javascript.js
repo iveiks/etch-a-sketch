@@ -2,6 +2,7 @@ const mainContainer = document.querySelector('#main-container');
 const resetButton = document.querySelector('#reset-button');
 const squaresPerSideButton = document.querySelector('#squares-per-side');
 const info = document.querySelector('#info');
+const maxSquares = 100;
 
 function playGame() {
   // Clear the grid
@@ -10,11 +11,13 @@ function playGame() {
   }
 
   // Get squares per side
-  let squaresPerSide = prompt('How many squares per side (Max 50): ');
-  if (squaresPerSide > 50) {
-    squaresPerSide = 50;
+  let squaresPerSide = prompt(
+    `How many squares per side (Max ${maxSquares}): `
+  );
+  if (squaresPerSide > maxSquares) {
+    squaresPerSide = maxSquares;
   } else if (squaresPerSide === null || squaresPerSide === '') {
-    squaresPerSide = Math.floor(Math.random() * 50 + 1);
+    squaresPerSide = Math.floor(Math.random() * maxSquares + 1);
   }
   info.textContent = `Squares per side: ${squaresPerSide}`;
 
