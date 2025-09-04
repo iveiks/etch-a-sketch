@@ -51,9 +51,10 @@ function playGame() {
     const ranC = Math.floor(Math.random() * 255 + 1);
     return `rgb(${ranA},${ranB},${ranC})`;
   }
+  let color = randomRGB();
   allSquares.forEach((square) =>
     square.addEventListener('mouseenter', () => {
-      square.style.backgroundColor = randomRGB();
+      square.style.backgroundColor = color;
       square.style.transition = 'all 400ms';
     })
   );
