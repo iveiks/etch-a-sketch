@@ -1,9 +1,11 @@
 const mainContainer = document.querySelector('#main-container');
 const squaresPerSide = 100;
 const gridSize = squaresPerSide * squaresPerSide;
-const squaresize = 700 / squaresPerSide + 'px';
+const squareSize = 700 / squaresPerSide + 'px';
+const resetButton = document.querySelector('#reset-button');
+
 console.log(`Grid size: ${squaresPerSide} * ${squaresPerSide}`);
-console.log(`Square size: ${squaresize}`);
+console.log(`Square size: ${squareSize}`);
 
 // Make a square
 function makeSquare() {
@@ -27,8 +29,8 @@ console.log(`Squares in allSquares NodeList: ${allSquares.length}`);
 // Define square size according to squares per side
 allSquares.forEach(
   (gridSquare) => (
-    (gridSquare.style.width = squaresize),
-    (gridSquare.style.height = squaresize)
+    (gridSquare.style.width = squareSize),
+    (gridSquare.style.height = squareSize)
   )
 );
 
@@ -39,9 +41,15 @@ allSquares.forEach((gridSquare) =>
   })
 );
 
-// Change square color when hovering off of it
-allSquares.forEach((gridSquare) =>
-  gridSquare.addEventListener('mouseleave', () => {
-    gridSquare.style.backgroundColor = 'transparent';
-  })
-);
+// // Change square color when hovering off of it
+// allSquares.forEach((gridSquare) =>
+//   gridSquare.addEventListener('mouseleave', () => {
+//     gridSquare.style.backgroundColor = 'transparent';
+//   })
+// );
+
+resetButton.addEventListener('click', () => {
+  allSquares.forEach(
+    (gridSquare) => (gridSquare.style.backgroundColor = 'transparent')
+  );
+});
