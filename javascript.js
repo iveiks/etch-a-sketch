@@ -12,7 +12,9 @@ function playGame() {
 
   // Get squares per side
   let squaresPerSide = prompt(
-    `How many squares per side (Max ${maxSquares}): `
+    `How many squares per side?
+    Max ${maxSquares}
+    empty = random)`
   );
   if (squaresPerSide > maxSquares) {
     squaresPerSide = maxSquares;
