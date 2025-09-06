@@ -1,8 +1,11 @@
-const mainContainer = document.querySelector('#main-container');
+const mainContainer = document.getElementById('main-container');
+const buttonsContainer = document.getElementById('buttons');
 const resetButton = document.querySelector('#reset-button');
 const squaresPerSideButton = document.querySelector('#squares-per-side');
 const info = document.querySelector('#info');
 const maxSquares = 100;
+const mainContainerHeight = mainContainer.offsetHeight;
+buttonsContainer.style.width = mainContainerHeight;
 
 function playGame() {
   // Clear the grid
@@ -25,7 +28,6 @@ function playGame() {
 
   // Calculate how many squares needed
   let squaresNeeded = squaresPerSide * squaresPerSide;
-
   // Populate grid
   for (i = 0; i < squaresNeeded; i++) {
     const square = document.createElement('div');
@@ -37,7 +39,7 @@ function playGame() {
   const allSquares = document.querySelectorAll('#grid-square');
 
   // Define size for all squares
-  let squareSize = 700 / squaresPerSide + 'px';
+  let squareSize = (mainContainerHeight - 2) / squaresPerSide + 'px';
   allSquares.forEach(
     (square) => (
       (square.style.width = squareSize), (square.style.height = squareSize)
@@ -51,10 +53,9 @@ function playGame() {
     const ranC = Math.floor(Math.random() * 255 + 1);
     return `rgb(${ranA},${ranB},${ranC})`;
   }
-  let color = randomRGB();
   allSquares.forEach((square) =>
     square.addEventListener('mouseenter', () => {
-      square.style.backgroundColor = color;
+      square.style.backgroundColor = randomRGB();
       square.style.transition = 'all 400ms';
     })
   );
