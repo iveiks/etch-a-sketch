@@ -53,10 +53,20 @@ function playGame() {
     const ranC = Math.floor(Math.random() * 255 + 1);
     return `rgb(${ranA},${ranB},${ranC})`;
   }
+  let startOpacity = 10;
   allSquares.forEach((square) =>
     square.addEventListener('mouseenter', () => {
-      square.style.backgroundColor = randomRGB();
-      square.style.transition = 'all 400ms';
+      if (!square.style.backgroundColor) {
+        square.style.backgroundColor = randomRGB();
+        square.style.opacity = startOpacity + '%';
+      } else if (square.style.backgroundColor) {
+        let runningOpacity = square.style.opacity * 100;
+        if (runningOpacity < 100) {
+          runningOpacity += 10;
+          square.style.opacity = runningOpacity + '%';
+        }
+        console.log(runningOpacity);
+      }
     })
   );
 
