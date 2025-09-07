@@ -56,7 +56,10 @@ function playGame() {
   let startOpacity = 10;
   allSquares.forEach((square) =>
     square.addEventListener('mouseenter', () => {
-      if (!square.style.backgroundColor) {
+      if (
+        !square.style.backgroundColor ||
+        square.style.backgroundColor === 'transparent'
+      ) {
         square.style.backgroundColor = randomRGB();
         square.style.opacity = startOpacity + '%';
       } else if (square.style.backgroundColor) {
