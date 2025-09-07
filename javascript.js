@@ -68,7 +68,6 @@ function playGame() {
           runningOpacity += 10;
           square.style.opacity = runningOpacity + '%';
         }
-        console.log(runningOpacity);
       }
     })
   );
